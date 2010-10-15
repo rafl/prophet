@@ -6,6 +6,7 @@ use File::Spec;
 use Prophet::Util;
 use Text::ParseWords qw(shellwords);
 use Scalar::Util qw(weaken);
+use Try::Tiny;
 
 has name => (
     is => 'ro',
@@ -67,12 +68,14 @@ sub eval {
     my $self = shift;
     my $line = shift;
 
-    eval {
+    try {
         local $SIG{__DIE__} = 'DEFAULT';
         my @args = shellwords($line);
         $self->cli->run_one_command(@args);
+    }
+    catch {
+        warn $_;
     };
-    warn $@ if $@;
 }
 
 sub _run {

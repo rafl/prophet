@@ -23,6 +23,7 @@ requires('XML::Atom::SimpleFeed');
 requires( 'Path::Dispatcher' => '0.14' );
 requires( 'Path::Dispatcher::Declarative' );
 requires('Time::Progress');
+requires('Try::Tiny');
 requires('Config::GitLike' => '1.02');
 requires('MIME::Base64::URLSafe');
 if ( $^O =~ /MSWin/ ) {
